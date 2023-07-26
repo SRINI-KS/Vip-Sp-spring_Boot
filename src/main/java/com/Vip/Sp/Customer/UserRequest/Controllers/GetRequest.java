@@ -33,6 +33,13 @@ public class GetRequest {
         return Collections.emptyList();
 
     }
+    @GetMapping("/getAllRequest")
+    private List<RequestModel> getAllRequest(@RequestHeader("Authorization") String token) {
+
+        String num;
+            return this.requestService.getAllRequest();
+//            dsfsafjlsajflg
+    }
 
 
 }
