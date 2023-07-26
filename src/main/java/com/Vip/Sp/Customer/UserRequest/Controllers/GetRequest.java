@@ -36,7 +36,7 @@ public class GetRequest {
     @GetMapping("/getAllRequest")
     private List<RequestModel> getAllRequest(@RequestHeader("Authorization") String token) {
 
-        String num;
+        String num=10;
             return this.requestService.getAllRequest();
 //            dsfsafjlsajflg
     }
