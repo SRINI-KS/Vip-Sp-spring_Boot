@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -20,11 +21,10 @@ public class RequestModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String email;
+    private Long requestId;
+    private UUID userId;
     private  String requestTitle;
-    private  String   category;
-    private  String  subCategory;
+    private  String  category;
     private  String  requestDiscription;
     private  Integer fixedAmount;
     private  Integer minAmount;
@@ -47,4 +47,7 @@ public class RequestModel {
     private  String city;
     private  String state;
     private  Integer pinCode;
+
+
+    private String status;
 }

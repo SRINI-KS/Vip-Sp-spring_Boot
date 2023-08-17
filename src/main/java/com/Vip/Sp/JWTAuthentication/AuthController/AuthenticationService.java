@@ -36,6 +36,7 @@ public class AuthenticationService {
 
 
         var user = User.builder()
+                .userId(request.getUserId())
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
@@ -43,7 +44,6 @@ public class AuthenticationService {
                 .role(request.getRole())
                 .dob(request.getDob())
                 .gender(request.getGender())
-                .profession(request.getProfession())
                 .phoneNumber(request.getPhoneNumber())
 
                 .build();
@@ -64,6 +64,7 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder().token(jwtToken)
 
+                .userId(user.getUserId())
                 .role(user.getRole().name())
                 .username(user.getFirstname())
                 .expiredate(jwTservice.extractExpiration(jwtToken))

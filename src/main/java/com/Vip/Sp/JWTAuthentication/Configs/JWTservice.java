@@ -22,6 +22,7 @@ public class JWTservice {
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
+ 
 
     public <T> T extractClaim(String token, Function<Claims, T> ClaimsResolver) {
         final Claims claims = extractAllClaims(token);
@@ -62,7 +63,7 @@ public class JWTservice {
         return (Date) extractClaim(token, Claims::getExpiration);
     }
 
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()

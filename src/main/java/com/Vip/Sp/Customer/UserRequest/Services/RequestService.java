@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RequestService {
@@ -31,7 +32,7 @@ public class RequestService {
         return this.requestJpa.findAll();
     }
 
-    public List<RequestModel> getRequestByEmail(String userEmail) {
-        return this.requestJpa.findByEmail(userEmail);
+    public List<RequestModel> getRequestByUserId(UUID userId) {
+        return this.requestJpa.findByUserId(userId);
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -21,8 +23,8 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID userId;
     private String firstname;
     private String lastname;
     private Date dob;
@@ -33,7 +35,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private String profession;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -52,6 +53,7 @@ public class User implements UserDetails {
         // TODO Auto-generated method stub
         return email;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
