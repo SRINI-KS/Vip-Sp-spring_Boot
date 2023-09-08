@@ -9,10 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @Builder
@@ -34,6 +31,29 @@ public class User implements UserDetails {
     private String gender;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "Customer_Details_Map",
+            joinColumns = {
+                    @JoinColumn(name = "Customer_Id"),
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="Customer_Details_Id")
+            }
+    )
+    private Set<CustomerDetails> customerDetails;
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "Provider_Details_Map",
+            joinColumns = {
+                    @JoinColumn(name = "Provider_Id"),
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="Provider_Details_Id")
+            }
+    )
+    private Set<ProviderDetails> providerDetails;
+
 
 
     @Override

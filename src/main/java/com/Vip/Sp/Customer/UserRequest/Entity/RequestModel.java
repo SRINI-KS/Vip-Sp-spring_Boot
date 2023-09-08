@@ -1,11 +1,9 @@
 package com.Vip.Sp.Customer.UserRequest.Entity;
 
 import com.Vip.Sp.Image.Entity.ImageModel;
+import com.Vip.Sp.Provider.Models.RequestAccept;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 import java.util.Set;
@@ -19,6 +17,7 @@ import java.util.UUID;
 @Table(name="user_request")
 public class RequestModel {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long requestId;
@@ -48,6 +47,23 @@ public class RequestModel {
     private  String state;
     private  Integer pinCode;
 
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "Request_AcceptDetails",
+            joinColumns = {
+                    @JoinColumn(name = "Request_Id"),
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="RequestAccept_Id")
+            }
+    )
+    private Set<RequestAccept> AcceptDetails;
 
-    private String status;
+
+    public void updateAcceptDetailsStatus(String newStatus) {
+        for (RequestAccept acceptDetail : AcceptDetails) {
+            acceptDetail.setCustomerConfirmation(newStatus);
+        }
+    }
+
+
 }
